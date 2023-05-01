@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "./explore.module.scss";
 import useArtist from "@component/hooks/useArtist";
+import Button from "../../components/Button";
 
 export default function Explore({ artist, token }) {
   const [imageURL, setImageURL] = useState(null);
   const { getArtist } = useArtist();
-  const [artistName, setArtistName] = useState("");
+  const [artistName, setArtistName] = useState("Andy Warhol");
 
   useEffect(() => {
     const imgVersions = artist.image_versions;
@@ -29,16 +30,20 @@ export default function Explore({ artist, token }) {
   return (
     <section className={styles.explore}>
       <h2>Explore Art By Famous Artists</h2>
-
-      <label htmlFor="name">Artist name</label>
-      <input
-        type="text"
-        value={artistName}
-        onChange={(e) => setArtistName(e.target.value)}
-      />
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
+      <div className={styles.artistForm}>
+        <label htmlFor="name">Artist name:</label>
+        <input
+          type="text"
+          id="name"
+          value={artistName}
+          onChange={(e) => setArtistName(e.target.value)}
+        />
+        <Button
+          btnText="Show Me A Painting!"
+          onClick={handleSubmit}
+          custom="submitArtistName"
+        />
+      </div>
 
       {imageURL && <img src={imageURL}></img>}
     </section>

@@ -1,0 +1,43 @@
+@import "../../sass/global";
+
+.explore {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  padding: 2em 3em;
+  h2 {
+    color: $black;
+    font-weight: $thin;
+    font-size: $font-size-h3;
+    text-align: center;
+  }
+  .artistForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+  }
+  input {
+    width: 30%;
+    height: 2em;
+    box-shadow: 0 0 1px rgb(110, 110, 110);
+    border: 0px;
+    border-radius: 8px;
+    padding: 1em;
+    font-size: $font-size-p-m;
+    font-weight: $extra-thin;
+    background-color: $white;
+    color: $black;
+    &:focus {
+      outline: none;
+      border: 1px solid #0066ff;
+    }
+  }
+  img {
+    width: 50%;
+    height: auto;
+  }
+}

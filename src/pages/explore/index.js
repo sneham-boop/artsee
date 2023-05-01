@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 export default function Explore({ artist, token }) {
   const [imageURL, setImageURL] = useState(null);
   const { getArtist } = useArtist();
-  const [artistName, setArtistName] = useState("Andy Warhol");
+  const [artistName, setArtistName] = useState("");
 
   useEffect(() => {
     const imgVersions = artist.image_versions;
@@ -17,15 +17,17 @@ export default function Explore({ artist, token }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setArtistName((prev) => {
-      return prev.replace(" ", "%20");
-    });
-    const apiUrl = `https://api.artsy.net/api/search?q=${artistName}&type=artist`;
+
+    const apiUrl = `https://api.artsy.net/api/search?q=${artistName.replace(
+      " ",
+      "%20"
+    )}&type=artist`;
     const headers = {
       "X-XAPP-Token": token,
     };
     const link = await getArtist(apiUrl, headers);
     setImageURL(link);
+    setArtistName("");
   };
   return (
     <section className={styles.explore}>

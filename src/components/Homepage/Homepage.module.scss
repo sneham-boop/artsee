@@ -7,13 +7,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  gap: 2em;
+ img {
+  width: 40%;
+  height: auto;
+ }
   h2 {
+    width: 70%;
     margin: 0;
     color: $black;
     font-weight: $thin;
-    font-size: $font-size-h2;
+    font-size: $font-size-h3;
     text-align: center;
+    a {
+      text-decoration: underline;
+      &:hover {
+        background-color: black;
+        color: $white;
+        transition: 0.3s;
+      }
+    }
   }
   p {
     margin: 0;

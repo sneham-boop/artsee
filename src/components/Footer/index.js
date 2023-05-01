@@ -23,7 +23,6 @@ export default function Footer() {
       <p className={styles["coolers-text"]}>
         Inspired by the Artsy API.
       </p>
-      <Button btnText={btnText} onClick={() => handleScroll()} custom="go-up"/>
     </footer>
   );
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./explore.module.scss";
-import axios from "axios";
 import useArtist from "@component/hooks/useArtist";
 
 export default function Explore({ artist, token }) {

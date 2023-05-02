@@ -11,10 +11,11 @@ export default function useArtist() {
       .then(async (link) => {
         const response = await fetch(link, { headers });
         const data = await response.json();
-        const imgVersions = data.image_versions;
-        let imgLink = data._links.image.href;
-        imgLink = imgLink.replace("{image_version}", imgVersions[1]);
-        return imgLink;
+        const artist = {...data};
+        const imgVersions = artist.image_versions;
+        let imageLink = artist._links.image.href;
+        imageLink = imageLink.replace("{image_version}", imgVersions[1]);
+        return {artist , imageLink};
       })
       .catch((error) => {
         console.error(error);

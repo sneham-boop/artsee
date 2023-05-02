@@ -46,14 +46,15 @@ export default function Genre({ genre: defaultGenre, token }) {
   const showButtons = () => {
     const genreNames = [
       "Pop Art",
-      "New Age",
+      "Collage",
       "Contemporary Art",
       "Street Art",
-      "Modern",
+      "Modern Art",
       "Bright Colors",
-      "Abstract",
+      "Abstract Art",
       "Figurative",
       "Expressionism",
+      "Sculpture"
     ];
     return genreNames.map((name, id) => {
       return (

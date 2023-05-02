@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import styles from "./explore.module.scss";
+import styles from "./artists.module.scss";
 import useArtist from "@component/hooks/useArtist";
 import Button from "../../components/Button";
 import Artist from "@component/components/Artist";
 import OtherArtworks from "@component/components/OtherArtworks";
 
-export default function Explore({ artist: defaultArtist, token }) {
+export default function Artists({ artist: defaultArtist, token }) {
   const { getArtist } = useArtist();
   const [imageURL, setImageURL] = useState(null);
   const [artistName, setArtistName] = useState("");

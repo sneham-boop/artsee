@@ -11,8 +11,8 @@ export default function Header({ user, login, logout }) {
           <Logo />
         </Link>
         <div className={styles["nav-right-group"]}>
-          <Link href="/explore">Explore Art</Link>
-          {/* <Link href="/faqs">FAQs</Link> */}
+          <Link href="/artists">Artists</Link>
+          <Link href="/genre">Genre</Link>
         </div>
       </nav>
     </>

@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import styles from "./explore.module.scss";
 import useArtist from "@component/hooks/useArtist";
 import Button from "../../components/Button";
+import Artwork from "@component/components/Artwork";
 
-export default function Explore({ artist, token }) {
+export default function Explore({ artist:defaultArtist, token }) {
   const [imageURL, setImageURL] = useState(null);
   const { getArtist } = useArtist();
   const [artistName, setArtistName] = useState("");
+  const [artist, setArtist] = useState(defaultArtist || {});
 
   useEffect(() => {
     const imgVersions = artist.image_versions;
@@ -25,8 +27,9 @@ export default function Explore({ artist, token }) {
     const headers = {
       "X-XAPP-Token": token,
     };
-    const link = await getArtist(apiUrl, headers);
-    setImageURL(link);
+    const response = await getArtist(apiUrl, headers);
+    setImageURL(response.imageLink);
+    setArtist(response.artist);
     setArtistName("");
   };
   return (
@@ -47,7 +50,8 @@ export default function Explore({ artist, token }) {
         />
       </div>
 
-      {imageURL && <img src={imageURL}></img>}
+      {/* {imageURL && <img src={imageURL}></img>} */}
+      <Artwork imageURL={imageURL} artist={artist}/>
     </section>
   );
 }

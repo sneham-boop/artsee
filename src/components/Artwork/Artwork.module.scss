@@ -1,0 +1,25 @@
+@import "../../sass/global";
+
+.artworkContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2em;
+  img {
+    width: 70%;
+    height: auto;
+    border-radius: 0.375rem;
+    border: 1px lightgray solid;
+  }
+  .artworkInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    p {
+      font-weight: $thin;
+      font-size: $font-size-p-sm;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 @import "../../sass/global";
 
-.artworkContainer {
+.artistContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -12,7 +12,7 @@
     border-radius: 0.375rem;
     border: 1px lightgray solid;
   }
-  .artworkInfo {
+  .artistInfo {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

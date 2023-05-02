@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import styles from "./explore.module.scss";
 import useArtist from "@component/hooks/useArtist";
 import Button from "../../components/Button";
-import Artwork from "@component/components/Artwork";
+import Artist from "@component/components/Artist";
+import OtherArtworks from "@component/components/OtherArtworks";
 
-export default function Explore({ artist:defaultArtist, token }) {
-  const [imageURL, setImageURL] = useState(null);
+export default function Explore({ artist: defaultArtist, token }) {
   const { getArtist } = useArtist();
+  const [imageURL, setImageURL] = useState(null);
   const [artistName, setArtistName] = useState("");
   const [artist, setArtist] = useState(defaultArtist || {});
+  const [artworks, setArtworks] = useState({});
 
   useEffect(() => {
     const imgVersions = artist.image_versions;
@@ -16,7 +18,7 @@ export default function Explore({ artist:defaultArtist, token }) {
     imgLink = imgLink.replace("{image_version}", imgVersions[1]);
     setImageURL(imgLink);
   }, []);
-
+  console.log(artist)
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -28,8 +30,9 @@ export default function Explore({ artist:defaultArtist, token }) {
       "X-XAPP-Token": token,
     };
     const response = await getArtist(apiUrl, headers);
-    setImageURL(response.imageLink);
+    setImageURL(response.mainArtImage);
     setArtist(response.artist);
+    setArtworks(response.artworksInfo);
     setArtistName("");
   };
   return (
@@ -50,8 +53,8 @@ export default function Explore({ artist:defaultArtist, token }) {
         />
       </div>
 
-      {/* {imageURL && <img src={imageURL}></img>} */}
-      <Artwork imageURL={imageURL} artist={artist}/>
+      <Artist imageURL={imageURL} artist={artist} />
+      {artworks.length > 0 && <OtherArtworks artworks={artworks} name={artist.name}/>}
     </section>
   );
 }
@@ -61,7 +64,7 @@ export async function getServerSideProps(context) {
   const headers = { "X-Xapp-Token": token }; // auth header with bearer token
 
   const resArtist = await fetch(
-    "https://api.artsy.net/api/artists/andy-warhol",
+    "https://api.artsy.net/api/artists/edouard-manet",
     {
       headers,
     }

@@ -5,7 +5,7 @@ export default function OtherArtworks({ artworks, name }) {
     return artworks.map((art, i) => {
       return (
         <div key={i} className={styles.artwork}>
-          <img src={art.imageLink} />
+          <img src={art.imageLink.replace("medium","large")} />
           <div className={styles.artworkInfo}>
             <h3>{art.title}</h3>
             <p>Date: {art.date}</p>

@@ -12,32 +12,56 @@ export default function Explore({ artist: defaultArtist, token }) {
   const [artist, setArtist] = useState(defaultArtist || {});
   const [artworks, setArtworks] = useState({});
 
+  // Set default artist information and image
   useEffect(() => {
     const imgVersions = artist.image_versions;
     let imgLink = artist._links.image.href;
     imgLink = imgLink.replace("{image_version}", imgVersions[1]);
     setImageURL(imgLink);
   }, []);
-  console.log(artist)
-  const handleSubmit = async (event) => {
+  // console.log(artist)
+
+  //  Handle the submit via input or button with artists name.
+  const handleSubmit = async (event, artistName) => {
     event.preventDefault();
 
     const apiUrl = `https://api.artsy.net/api/search?q=${artistName.replace(
       " ",
       "%20"
     )}&type=artist`;
+
     const headers = {
       "X-XAPP-Token": token,
     };
+
     const response = await getArtist(apiUrl, headers);
+    if (!response) return null;
     setImageURL(response.mainArtImage);
     setArtist(response.artist);
     setArtworks(response.artworksInfo);
     setArtistName("");
   };
+
+  const showButtons = () => {
+    const artistNames = ["Van Gogh", "Manet", "Monet", "Seurat", "Matisse","Toulouse","Rousseau"];
+    return artistNames.map((name, id) => {
+      return (
+        <Button
+          key={id}
+          btnText={name}
+          onClick={(e) => handleSubmit(e, name)}
+          custom="exampleArtistNames"
+        />
+      );
+    });
+  };
+
   return (
     <section className={styles.explore}>
       <h2>Explore Art By Famous Artists</h2>
+      <div className={styles.buttons}>
+        {showButtons()}
+      </div>
       <div className={styles.artistForm}>
         <label htmlFor="name">Artist name:</label>
         <input
@@ -48,13 +72,15 @@ export default function Explore({ artist: defaultArtist, token }) {
         />
         <Button
           btnText="Show Me A Painting!"
-          onClick={handleSubmit}
+          onClick={(e) => handleSubmit(e, artistName)}
           custom="submitArtistName"
         />
       </div>
 
       <Artist imageURL={imageURL} artist={artist} />
-      {artworks.length > 0 && <OtherArtworks artworks={artworks} name={artist.name}/>}
+      {artworks.length > 0 && (
+        <OtherArtworks artworks={artworks} name={artist.name} />
+      )}
     </section>
   );
 }

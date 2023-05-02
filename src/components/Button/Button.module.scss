@@ -28,4 +28,16 @@
 .submitArtistName {
   height: 3em;
   padding: 1em;
+  border-radius: 2rem;
+  border: 1px solid;
+  &:hover {
+    cursor: pointer;
+    border-radius: 2rem;
+    background-color: $white;
+    color: $black;
+  }
+}
+
+.exampleArtistNames {
+  background-color: $orange;
 }

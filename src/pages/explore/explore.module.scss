@@ -8,6 +8,13 @@
   align-items: center;
   gap: 2em;
   padding: 2em 3em;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+  }
   h2 {
     color: $black;
     font-weight: $thin;

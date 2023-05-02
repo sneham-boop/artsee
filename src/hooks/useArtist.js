@@ -26,7 +26,7 @@ export default function useArtist() {
         let { artworks } = artworksJSON._embedded;
         let artworksInfo = [];
         if (artworks.length > 0) {
-          console.log(artworks);
+          // console.log(artworksJSON);
           artworksInfo = artworks.map((art) => {
             let info = {
               id: art.id,

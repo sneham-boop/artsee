@@ -1,50 +1,61 @@
 import { useEffect, useState } from "react";
 import styles from "./genre.module.scss";
-import useArtist from "@component/hooks/useArtist";
+import useGenre from "@component/hooks/useGenre";
 import Button from "../../components/Button";
-import Artist from "@component/components/Artist";
-import OtherArtworks from "@component/components/OtherArtworks";
+import ShowGenre from "@component/components/ShowGenre";
+import OtherArtists from "@component/components/OtherArtists";
 
-export default function Genre({ artist: defaultArtist, token }) {
-  const { getArtist } = useArtist();
+export default function Genre({ genre: defaultGenre, token }) {
+  const { getArtInGenre } = useGenre();
   const [imageURL, setImageURL] = useState(null);
-  const [artistName, setArtistName] = useState("");
-  const [artist, setArtist] = useState(defaultArtist || {});
-  const [artworks, setArtworks] = useState({});
+  const [genreName, setGenreName] = useState("");
+  const [genre, setGenre] = useState(defaultGenre || {});
+  const [artists, setArtists] = useState({});
 
   // Set default artist information and image
   useEffect(() => {
-    const imgVersions = artist.image_versions;
-    let imgLink = artist._links.image.href;
+    const imgVersions = genre.image_versions;
+    let imgLink = genre._links.image.href;
     imgLink = imgLink.replace("{image_version}", imgVersions[1]);
     setImageURL(imgLink);
   }, []);
   // console.log(artist)
 
   //  Handle the submit via input or button with artists name.
-  const handleSubmit = async (event, artistName) => {
+  const handleSubmit = async (event, genreName) => {
     event.preventDefault();
 
-    const apiUrl = `https://api.artsy.net/api/search?q=${artistName.replace(
+    const apiUrl = `https://api.artsy.net/api/search?q=${genreName.replace(
       " ",
       "%20"
-    )}&type=artist`;
+    )}&type=gene`;
 
     const headers = {
       "X-XAPP-Token": token,
     };
 
-    const response = await getArtist(apiUrl, headers);
+    const response = await getArtInGenre(apiUrl, headers);
     if (!response) return null;
+    console.log(response);
     setImageURL(response.mainArtImage);
-    setArtist(response.artist);
-    setArtworks(response.artworksInfo);
-    setArtistName("");
+    setGenre(response.genre);
+    setArtists(response.artistsInfo);
+    setGenreName("");
   };
 
   const showButtons = () => {
-    const artistNames = ["Van Gogh", "Manet", "Monet", "Seurat", "Matisse","Toulouse","Rousseau"];
-    return artistNames.map((name, id) => {
+    const genreNames = [
+      "Pop Art",
+      "New Age",
+      "Contemporary Art",
+      "Street Art",
+      "Modern",
+      "Bright Colors",
+      "Abstract",
+      "Figurative",
+      "Expressionism",
+    ];
+    return genreNames.map((name, id) => {
       return (
         <Button
           key={id}
@@ -58,28 +69,26 @@ export default function Genre({ artist: defaultArtist, token }) {
 
   return (
     <section className={styles.explore}>
-      <h2>Explore Art By Famous Artists</h2>
-      <div className={styles.buttons}>
-        {showButtons()}
-      </div>
+      <h2>Explore Art In Different Genres</h2>
+      <div className={styles.buttons}>{showButtons()}</div>
       <div className={styles.artistForm}>
-        <label htmlFor="name">Artist name:</label>
+        <label htmlFor="name">Enter Genre:</label>
         <input
           type="text"
           id="name"
-          value={artistName}
-          onChange={(e) => setArtistName(e.target.value)}
+          value={genreName}
+          onChange={(e) => setGenreName(e.target.value)}
         />
         <Button
-          btnText="Show Me A Painting!"
-          onClick={(e) => handleSubmit(e, artistName)}
+          btnText="Show Me Some Art!"
+          onClick={(e) => handleSubmit(e, genreName)}
           custom="submitArtistName"
         />
       </div>
 
-      <Artist imageURL={imageURL} artist={artist} />
-      {artworks.length > 0 && (
-        <OtherArtworks artworks={artworks} name={artist.name} />
+      <ShowGenre imageURL={imageURL} genre={genre} />
+      {artists.length > 0 && (
+        <OtherArtists artists={artists} name={genre.name} />
       )}
     </section>
   );
@@ -90,13 +99,13 @@ export async function getServerSideProps(context) {
   const headers = { "X-Xapp-Token": token }; // auth header with bearer token
 
   const resArtist = await fetch(
-    "https://api.artsy.net/api/artists/edouard-manet",
+    "https://api.artsy.net/api/genes/522e169febad64e88d000001",
     {
       headers,
     }
   );
-  const artist = await resArtist.json();
+  const genre = await resArtist.json();
   return {
-    props: { artist, token }, // will be passed to the page component as props
+    props: { genre, token }, // will be passed to the page component as props
   };
 }

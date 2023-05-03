@@ -18,10 +18,18 @@ export default function Footer() {
         <span>
           <Heart sx={{ color: "#F9684F" }} />
         </span>
-        <span>by Sneha Mahajan</span>
+        <span>
+          by{" "}
+          <a href="https://snehakmahajan.com/" target="_blank">
+            Sneha Mahajan
+          </a>
+        </span>
       </section>
       <p className={styles["coolers-text"]}>
-        Inspired by the Artsy API.
+        Inspired by the{" "}
+        <a href="https://developers.artsy.net/" target="_blank">
+          Artsy API
+        </a>
       </p>
     </footer>
   );

@@ -23,8 +23,8 @@
     padding: 2px 4px;
     border-radius: 5px;
     overflow: hidden;
-    color: white;
-    background-color: $coolersBlue;
+    color: $black;
+    // background-color: $lightgray;
     &:hover {
       color: white;
       background-color: $black;
@@ -39,4 +39,7 @@
   flex-direction: row;
   align-items: center;
   gap: 3px;
+  a {
+    text-decoration: underline;
+  }
 }

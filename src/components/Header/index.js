@@ -13,6 +13,7 @@ export default function Header({ user, login, logout }) {
         <div className={styles["nav-right-group"]}>
           <Link href="/artists">Artists</Link>
           <Link href="/genre">Genre</Link>
+          <Link href="https://github.com/sneham-boop/artsee" target="_blank">Github</Link>
         </div>
       </nav>
     </>

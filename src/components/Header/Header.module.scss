@@ -21,7 +21,8 @@
     padding-top: 0.2em;
     &:hover {
       border-top: 1px solid $black;
-      transition: 0.5s;
+      transition: 0.3s;
+      font-weight: $medium;
     }
   }
   .nav-right-group {

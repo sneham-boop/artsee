@@ -1,11 +1,10 @@
 # Artsee
 
-Artsee is a NextJS app that uses Artsy's API to explore art by famous artists.
+Artsee is a NextJS app that uses Artsy's API to explore art by famous artists. It is live and deployed on Vercel [here](https://artsee-two.vercel.app/).
 
 ## Final Product
 
-1. Home Page
-   !["Home page"](/public/Home.png)
+1. Home Page !["Home page"](/public/Home.png)
 
 2. Explore art by famous artists
 <img src="public/ExploreArt.png" alt="See art by famous artists" width="100%">
@@ -18,8 +17,8 @@ Artsee is a NextJS app that uses Artsy's API to explore art by famous artists.
 
 5. Explore more art by other artists of that same genre
 <img src="public/ExploreOtherArtists.png" alt="See art by famous artists" width="100%">
-## Getting Started
 
+## Getting Started
 1. Fork it, clone it on your machine and `cd artsee`
 
 2. Then install all dependencies.

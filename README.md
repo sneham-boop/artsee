@@ -6,6 +6,7 @@ Artsee is a NextJS app that uses Artsy's API to explore art by famous artists. I
 
 1. Home Page
 <img src="public/Home.png" alt="See art by famous artists" width="100%">
+
 2. Explore art by famous artists
 <img src="public/ExploreArt.png" alt="See art by famous artists" width="100%">
 

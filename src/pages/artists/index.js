@@ -15,6 +15,7 @@ export default function Artists({ artist: defaultArtist, token }) {
   // Set default artist information and image
   useEffect(() => {
     const imgVersions = artist.image_versions;
+    // console.log(artist);
     let imgLink = artist._links.image.href;
     imgLink = imgLink.replace("{image_version}", imgVersions[1]);
     setImageURL(imgLink);
